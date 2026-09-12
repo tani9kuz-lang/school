@@ -43,6 +43,11 @@ public class StudentController {
         return ResponseEntity.ok(updatedStudent);
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity deleteStudent(@PathVariable Long id){
+        studentService.deleteStudent(id);
+        return ResponseEntity.ok().build();
+    }
     @GetMapping("/filter")
     public ResponseEntity<Collection<Student>> getStudentsByAge(@RequestParam("age") int age) {
         Collection<Student> result = studentService.findStudentsByAge(age);

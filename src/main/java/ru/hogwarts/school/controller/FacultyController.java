@@ -43,6 +43,12 @@ public class FacultyController {
         return ResponseEntity.ok(updatedFaculty);
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity deleteFaculty(@PathVariable Long id){
+        facultyService.deleteFaculty(id);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/filter")
     public ResponseEntity<Collection<Faculty>> getFacultiesByColor(@RequestParam("color") String color) {
         Collection<Faculty> result = facultyService.findFacultyByColor(color);
