@@ -20,7 +20,6 @@ public class FacultyController {
     @PostMapping
     public ResponseEntity<Faculty> createFaculty(@RequestBody Faculty faculty) {
         Faculty createFaculty = facultyService.createFaculty(faculty);
-        Faculty createdFaculty;
         return ResponseEntity.ok(createFaculty);
     }
 
@@ -44,7 +43,7 @@ public class FacultyController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity deleteFaculty(@PathVariable Long id){
+    public ResponseEntity<Void> deleteFaculty(@PathVariable Long id) {
         facultyService.deleteFaculty(id);
         return ResponseEntity.ok().build();
     }

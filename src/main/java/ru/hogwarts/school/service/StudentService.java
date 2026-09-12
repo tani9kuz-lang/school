@@ -1,11 +1,8 @@
 package ru.hogwarts.school.service;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
-
 import java.util.Collection;
 
 @Service
@@ -23,7 +20,7 @@ public class StudentService {
     }
     //read
     public Student findStudent(long id){
-        return studentRepository.findById(id).get();
+        return studentRepository.findById(id).orElse(null);
     }
 
     //update
@@ -39,6 +36,6 @@ public class StudentService {
     // фильтрация студентов по возрасту
 
     public Collection<Student> findStudentsByAge(int age) {
-        return studentRepository.findAll();
+        return studentRepository.findByAge(age);
     }
 }

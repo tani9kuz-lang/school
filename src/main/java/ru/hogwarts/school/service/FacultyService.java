@@ -24,7 +24,7 @@ public class FacultyService {
 
     //read
     public Faculty findFaculty(long id){
-        return facultyRepository.findById(id).get();
+        return facultyRepository.findById(id).orElse(null);
     }
 
     //update
@@ -39,6 +39,6 @@ public class FacultyService {
 
     // фильтрация факультетов по цвету
     public Collection<Faculty> findFacultyByColor(String color) {
-        return facultyRepository.findAll();
+        return facultyRepository.findByColor(color);
     }
 }
