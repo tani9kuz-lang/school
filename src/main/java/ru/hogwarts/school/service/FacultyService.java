@@ -18,27 +18,31 @@ public class FacultyService {
     }
 
     //create
-    public Faculty createFaculty (Faculty faculty){
+    public Faculty createFaculty(Faculty faculty) {
         return facultyRepository.save(faculty);
     }
 
     //read
-    public Faculty findFaculty(long id){
+    public Faculty findFaculty(long id) {
         return facultyRepository.findById(id).orElse(null);
     }
 
     //update
-    public  Faculty editFaculty(Faculty faculty){
-       return facultyRepository.save(faculty);
+    public Faculty editFaculty(Faculty faculty) {
+        return facultyRepository.save(faculty);
     }
 
     //delete
-    public void deleteFaculty (long id){
+    public void deleteFaculty(long id) {
         facultyRepository.deleteById(id);
     }
 
     // фильтрация факультетов по цвету
     public Collection<Faculty> findFacultyByColor(String color) {
         return facultyRepository.findByColor(color);
+    }
+
+    public Collection<Faculty> findFacultyByNameOrColor(String searchParam) {
+        return facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(searchParam, searchParam);
     }
 }
