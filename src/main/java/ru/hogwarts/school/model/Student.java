@@ -1,5 +1,6 @@
 package ru.hogwarts.school.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +17,9 @@ public class Student {
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
+    @OneToOne(mappedBy = "student")
+    @JsonIgnore
+    private Avatar avatar;
 
     public Student() {
     }
@@ -43,6 +47,10 @@ public class Student {
         return faculty;
     }
 
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
     //Set
     public void setName(String name) {
         this.name = name;
@@ -58,5 +66,9 @@ public class Student {
 
     public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
     }
 }
