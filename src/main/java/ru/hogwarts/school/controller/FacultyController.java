@@ -25,7 +25,7 @@ public class FacultyController {
     }
 
     @GetMapping("{facultyId}")
-    public ResponseEntity<Faculty> getFaculty(@PathVariable long facultyId) {
+    public ResponseEntity<Faculty> getFaculty(@PathVariable Long facultyId) {
         Faculty faculty = facultyService.findFaculty(facultyId);
         if (faculty == null) {
             return ResponseEntity.notFound().build();
@@ -72,4 +72,6 @@ public class FacultyController {
         }
         return ResponseEntity.ok(faculty.getStudents());
     }
+
+
 }

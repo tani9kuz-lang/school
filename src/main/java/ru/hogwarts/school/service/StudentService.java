@@ -19,7 +19,7 @@ public class StudentService {
         return studentRepository.save(student);
     }
     //read
-    public Student findStudent(long id){
+    public Student findStudent(Long id){
         return studentRepository.findById(id).orElse(null);
     }
 
@@ -29,7 +29,7 @@ public class StudentService {
     }
 
     //delete
-    public void deleteStudent(long id){
+    public void deleteStudent(Long id){
         studentRepository.deleteById(id);
     }
 

@@ -11,7 +11,6 @@ import ru.hogwarts.school.service.AvatarService;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.http.HttpHeaders;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -54,16 +53,19 @@ public class AvatarController {
     @GetMapping("{studentId}/from-disk")
     public void downloadFromDisk(@PathVariable Long studentId, HttpServletResponse response) throws IOException {
         Avatar avatar = avatarService.findAvatar(studentId);
-        if (avatar == null) {
+        if (avatar == null || avatar.getFilePath() == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+        Path path = Path.of(avatar.getFilePath()).toAbsolutePath();
+
+        if (!Files.exists(path)) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
 
-        Path path = Path.of(avatar.getFilePath());
-
         response.setContentType(avatar.getMediaType());
         response.setContentLength((int) avatar.getFileSize());
-
 
         try (InputStream is = Files.newInputStream(path);
              OutputStream os = response.getOutputStream()) {
