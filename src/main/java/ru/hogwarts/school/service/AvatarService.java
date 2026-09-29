@@ -2,6 +2,8 @@ package ru.hogwarts.school.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -66,5 +68,11 @@ public class AvatarService {
     private String getExtension(String fileName) {
         if (fileName == null) return "";
         return fileName.substring(fileName.lastIndexOf(".") + 1);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Avatar> getAllAvatars(int pageNumber, int pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
+        return avatarRepository.findAll(pageRequest);
     }
 }

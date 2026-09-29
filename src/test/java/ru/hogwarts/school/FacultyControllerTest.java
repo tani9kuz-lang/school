@@ -58,8 +58,9 @@ public class FacultyControllerTest {
         Assertions.assertThat(response.getBody().getId()).isNotNull();
         Assertions.assertThat(response.getBody().getName()).isEqualTo("Гриффиндор");
     }
-    //Получение факультета по ID
 
+
+    //Получение факультета по ID
     @Test
     void shouldGetFaculty() {
         Faculty savedFaculty = facultyRepository.save(new Faculty(null, "Гриффиндор", "Крассный"));
