@@ -2,6 +2,8 @@ package ru.hogwarts.school.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Check;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 public class Student {
@@ -10,8 +12,14 @@ public class Student {
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String name;
-    private int age;
+
+
+
+    @Check(constraints = "age >= 16" )
+    @ColumnDefault("20")
+    private Integer age;
 
     @ManyToOne
     @JoinColumn(name = "faculty_id")

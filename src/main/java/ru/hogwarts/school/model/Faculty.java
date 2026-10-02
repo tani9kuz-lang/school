@@ -1,21 +1,22 @@
 package ru.hogwarts.school.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.List;
 
 
 @Entity
+@Table(name = "faculty", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "color"})})
 public class Faculty {
 
     @Id
     @GeneratedValue
     private  Long id;
+
+    @Column(unique = true)
     private  String name;
+    @Column(unique = true)
     private  String color;
 
     @OneToMany(mappedBy = "faculty")

@@ -1,0 +1,16 @@
+CREATE TABLE car(
+    id BIGSERIAL PRIMARY KEY ,
+    brand VARCHAR(100),
+    model VARCHAR(100),
+    price INTEGER NOT NULL
+);
+
+CREATE TABLE person(
+    id BIGSERIAL PRIMARY KEY ,
+    name VARCHAR(255) NOT NULL,
+    age INTEGER NOT NULL,
+    has_license BOOLEAN NOT NULL,
+    car_id BIGINT,
+
+    CONSTRAINT fk_car FOREIGN KEY (car_id) REFERENCES car (id) ON DELETE SET NULL
+);
