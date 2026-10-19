@@ -34,8 +34,6 @@ public class Avatar {
         this.student = student;
     }
 
-
-    //Get
     public String getFilePath() {
         return filePath;
     }
@@ -55,8 +53,6 @@ public class Avatar {
     public Student getStudent() {
         return student;
     }
-
-    //Set
 
     public void setId(Long id) {
         this.id = id;

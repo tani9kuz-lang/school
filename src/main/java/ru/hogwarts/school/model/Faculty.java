@@ -31,7 +31,6 @@ public class Faculty {
         this.color = color;
     }
 
-    // Get
 
     public Long getId() {
         return id;
@@ -49,7 +48,6 @@ public class Faculty {
         return students;
     }
 
-    //Set
     public void setId(Long id) {
         this.id = id;
     }

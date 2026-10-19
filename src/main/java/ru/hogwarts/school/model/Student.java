@@ -38,7 +38,6 @@ public class Student {
         this.age = age;
     }
 
-    //Get
     public String getName() {
         return name;
     }
@@ -59,7 +58,6 @@ public class Student {
         return avatar;
     }
 
-    //Set
     public void setName(String name) {
         this.name = name;
     }

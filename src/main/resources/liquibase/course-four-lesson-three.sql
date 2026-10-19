@@ -16,9 +16,22 @@ CREATE TABLE student (
        faculty_id BIGINT,
        CONSTRAINT fk_faculty FOREIGN KEY (faculty_id) REFERENCES faculty (id) ON DELETE SET NULL
 );
-
 -- changeset tkuznetsova:3
-CREATE INDEX student_name_idx ON student (name);
+CREATE TABLE avatar (
+                        id BIGSERIAL PRIMARY KEY,
+                        file_path VARCHAR(255),
+                        file_size BIGINT NOT NULL,
+                        media_type VARCHAR(255),
+                        data OID,
+                        student_id BIGINT,
+                        CONSTRAINT fk_avatar_student FOREIGN KEY (student_id) REFERENCES student (id) ON DELETE CASCADE
+);
+
 
 -- changeset tkuznetsova:4
+CREATE INDEX student_name_idx ON student (name);
+
+-- changeset tkuznetsova:5
 CREATE INDEX faculty_name_color_idx ON faculty (name, color);
+-- changeset tkuznetsova:6
+CREATE SEQUENCE avatar_seq START WITH 1 INCREMENT BY 50;
