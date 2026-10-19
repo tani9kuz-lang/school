@@ -9,7 +9,7 @@ import org.hibernate.annotations.ColumnDefault;
 public class Student {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
