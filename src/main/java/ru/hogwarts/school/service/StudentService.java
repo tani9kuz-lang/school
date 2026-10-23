@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -66,5 +68,24 @@ public class StudentService {
 
        logger.info("Method to get last five added students was called");
         return studentRepository.getLastFiveStudents();
+    }
+
+    public List<String> getAllStudentsNamesStartingWithA() {
+        logger.info("Method to get all student names starting with A was called");
+
+        return studentRepository.findAll().stream()
+                .map(Student::getName)
+                .filter(name -> name.startsWith("А") || name.startsWith("а"))
+                .map(String::toUpperCase)
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public Double getAverageAgeUsingStream(){
+        logger.info("Method to get average all student age ");
+        return studentRepository.findAll().stream()
+                .mapToInt(Student::getAge)
+                .average()
+                .orElse(0.0);
     }
 }

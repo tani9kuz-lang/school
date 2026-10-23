@@ -26,18 +26,18 @@ public class AvatarController {
         this.avatarService = avatarService;
     }
 
-    //Загрузка картинки
+
     @PostMapping(value = "{studentId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> uploadAvatar(@PathVariable Long studentId,
                                                @RequestParam MultipartFile file) throws IOException {
-        if (file.getSize() >= 1024 * 300) { // Ограничение на 300 Кб (опционально)
+        if (file.getSize() >= 1024 * 300) {
             return ResponseEntity.badRequest().body("Файл слишком большой!");
         }
         avatarService.uploadAvatar(studentId, file);
         return ResponseEntity.ok().build();
     }
 
-    //Получение картинки из БД
+
     @GetMapping("{studentId}/from-db")
     public ResponseEntity<byte[]> downloadFromDb(@PathVariable Long studentId) {
         Avatar avatar = avatarService.findAvatar(studentId);
@@ -51,7 +51,7 @@ public class AvatarController {
     }
 
 
-    //Получение картинки из директории
+
     @GetMapping("{studentId}/from-disk")
     public void downloadFromDisk(@PathVariable Long studentId, HttpServletResponse response) throws IOException {
         Avatar avatar = avatarService.findAvatar(studentId);

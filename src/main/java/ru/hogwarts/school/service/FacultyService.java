@@ -8,6 +8,7 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.repository.FacultyRepository;
 
 import java.util.Collection;
+import java.util.Comparator;
 
 
 @Service
@@ -54,5 +55,14 @@ public class FacultyService {
     public Collection<Faculty> findFacultyByNameOrColor(String searchParam) {
        logger.info("Was invoked method for find faculty by name or color");
         return facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(searchParam, searchParam);
+    }
+
+    public String getLongestFacultyName(){
+        logger.info("Method to get longest faculty name was called");
+
+        return facultyRepository.findAll().stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparingInt(String::length))
+                .orElse("Факультеты не найдены");
     }
 }
