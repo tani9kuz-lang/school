@@ -88,4 +88,9 @@ public class StudentService {
                 .average()
                 .orElse(0.0);
     }
+
+    public List<Student> getAllStudents() {
+        logger.info("Method to get all students was called");
+        return studentRepository.findAll();
+    }
 }
